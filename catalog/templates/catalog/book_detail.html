@@ -1,0 +1,33 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{{ book.title }}</h1>
+
+  <p><strong>Author:</strong> {{ book.author }}</p>
+  <p><strong>Genre:</strong> {{ book.genre }}</p>
+  <p><strong>Description:</strong> {{ book.description }}</p>
+  <p><strong>Maximum retail price:</strong> ₹{{ book.maximum_retail_price }}</p>
+  <p><strong>Rating:</strong> {{ book.rating }}</p>
+  
+  <div class="mt-5">
+    <hr>
+    <h4>Copies</h4>
+    <hr>
+    <ul>
+    {% for copy in book.bookcopy_set.all %}
+      <li>
+      <h5>ID- {{copy.id}}</h5>
+      {% if copy.status %}
+      <h6 class="text-success">Available</h6>
+      {% else %}
+      <h6 class="text-danger">On Loan</h6>
+      <h6><strong>Borrowed on:</strong> {{ copy.borrow_date }} by {{ copy.borrower }}</h6>
+      {% endif %}
+      </li>
+      <br>
+    {% empty %}
+      <h6 class="text-muted">No copies available</h6>
+    {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

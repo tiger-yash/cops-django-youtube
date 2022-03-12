@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-from .models import Book, BookCopy
+from .models import *
 
 def index(request):
     """View function for home page of site."""
@@ -37,3 +38,14 @@ class BookListView(generic.ListView):
 
 class BookDetailView(generic.DetailView):
     model = Book
+
+class LoanedBooksByUserListView (LoginRequiredMixin, generic.ListView):
+    """Generic class-based view listing books to loan to current user"""
+    model = BookCopy
+    template_name = "catalog/bookcopy_list_borrowed_user.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        """Return the books on loan to the current user"""
+        return BookCopy.objects.filter(borrower=self.request.user).filter(status__exact=1).order_by('borrow_date')
+        

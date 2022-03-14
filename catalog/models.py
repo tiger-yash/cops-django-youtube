@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-import datetime as date
+from datetime import datetime
 # Create your models here.
 
 class Book(models.Model):
@@ -27,12 +27,13 @@ class BookCopy(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     borrow_date = models.DateField(null=True, blank=True)
     # True status means that the copy is available for issue, False means unavailable
+    due_back = models.DateField(null=True, blank=True)
     status = models.BooleanField(default=False)
     borrower = models.ForeignKey(User, related_name='borrower', null=True, blank=True, on_delete=models.SET_NULL)
 
     @property
     def is_overdue(self):
-        if self.borrow_date and date.today() > self.borrow_date:
+        if self.borrow_date and datetime.today().date() > self.borrow_date:
             return True
         return False
 

@@ -19,8 +19,13 @@ from django.urls import include
 from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponse
+
+def okay(request):
+    return HttpResponse('pretend-binary-data-here', content_type='image/jpeg')
 
 urlpatterns = [
+    path('favicon.ico', okay),
     path('admin/', admin.site.urls),
     path('catalog/', include('catalog.urls')),
     path('', RedirectView.as_view(url='catalog/', permanent=True)),

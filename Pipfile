@@ -8,6 +8,7 @@ asgiref = "*"
 "backports.zoneinfo" = "*"
 django = "*"
 gunicorn = "*"
+psycopg2 = "*"
 sqlparse = "*"
 
 [dev-packages]

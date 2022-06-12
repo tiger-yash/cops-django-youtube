@@ -79,14 +79,13 @@ WSGI_APPLICATION = 'locallibrary.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': '',
-        'HOST': '',
-        'PORT': '',
-        'USER': '',
-        'PASSWORD': ''
+        'NAME': 'd39k8gs6eh3n7m',
+        'HOST': 'ec2-54-227-248-71.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'kbanxbkiramwxe',
+        'PASSWORD': 'f73a8b97930270899ec6ee1f02959ca783f491a98e4d44c0afdc369b2f1b22d0'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
